@@ -1,6 +1,6 @@
 {
   "name": "IMDb ratings for watchever",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 2,
   "description": "Enhances watchever with movie ratings from IMDb and Rotten Tomatoes.",
   "icons": {

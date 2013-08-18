@@ -63,8 +63,13 @@
 	};
 
 	var annotate = function(data) {
-		addRatingRow('imdb', data.imdbRating, 10, 'IMDb', 'http://www.imdb.com/title/' + encodeURIComponent(data.imdbID));
-		addRatingRow('rotten', data.tomatoMeter, 100, 'Rotten Tomatoes', null, data.tomatoConsensus);
+		
+		if(data.imdbID) {
+			addRatingRow('imdb', data.imdbRating, 10, 'IMDb', 'http://www.imdb.com/title/' + encodeURIComponent(data.imdbID));
+		}
+		if(data.tomatoMeter !== 'N/A') {
+			addRatingRow('rotten', data.tomatoMeter, 100, 'Rotten Tomatoes', null, data.tomatoConsensus);
+		}
 	};
 
 	var fireQuery = function(query, cb) {
