@@ -68,7 +68,8 @@
 			addRatingRow('imdb', data.imdbRating, 10, 'IMDb', 'http://www.imdb.com/title/' + encodeURIComponent(data.imdbID));
 		}
 		if(data.tomatoMeter !== 'N/A') {
-			addRatingRow('rotten', data.tomatoMeter, 100, 'Rotten Tomatoes', null, data.tomatoConsensus);
+			var details = data.tomatoConsensus !== 'N/A' ? data.tomatoConsensus : null; 
+			addRatingRow('rotten', data.tomatoMeter, 100, 'Rotten Tomatoes', null, details);
 		}
 	};
 
