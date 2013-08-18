@@ -1,0 +1,32 @@
+{
+  "name": "IMDb ratings for watchever",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Enhances watchever with movie ratings from IMDb and Rotten Tomatoes.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "*://www.watchever.de/filme/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.watchever.de/filme/*"
+      ],
+      "include_globs": [
+        "*://www.watchever.de/filme/*-??????"
+      ],   
+      "css" : [
+        "src/inject/inject.css"
+      ],   
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}
