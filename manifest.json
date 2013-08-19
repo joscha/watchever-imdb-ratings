@@ -24,9 +24,12 @@
         "src/inject/inject.css"
       ],   
       "js": [
-        "js/jquery/jquery.min.js",
+        "js/jquery/jquery-2.0.3.min.js",
         "src/inject/inject.js"
       ]
     }
+  ],
+  "web_accessible_resources": [
+    "js/jquery/jquery-2.0.3.min.map"
   ]
 }
