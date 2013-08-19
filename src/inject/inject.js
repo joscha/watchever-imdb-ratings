@@ -1,6 +1,8 @@
 (function() {
 	"use strict";
 
+	var isDebug = false;
+
 	var extensionId = chrome.i18n.getMessage("@@extension_id");
 
 	var container = $('.ratingBloc > .rating');
@@ -51,16 +53,10 @@
 		}	
 	}
 
-
-	var releaseInfo = $('.MovieInfoRelease').text().trim().split(/\s*\|\s*/);
-	var year = releaseInfo[0];
-	var title = $('.InfoDetails').eq(3).find('.links').text();
-
-	var query = {
-		t: title,
-		y: year,
-		tomatoes: true
-	};
+	// shamelessly taken from http://stackoverflow.com/questions/4292320
+	function htmlNumericEntityUnescape(string) {
+		return string.replace(/&#([^\s]*);/g, function(match, match2) {return String.fromCharCode(Number(match2));});
+	}
 
 	var annotate = function(data) {
 		
@@ -68,13 +64,19 @@
 			addRatingRow('imdb', data.imdbRating, 10, 'IMDb', 'http://www.imdb.com/title/' + encodeURIComponent(data.imdbID));
 		}
 		if(data.tomatoMeter !== 'N/A') {
-			var details = data.tomatoConsensus !== 'N/A' ? data.tomatoConsensus : null; 
+			var details = data.tomatoConsensus !== 'N/A' ? htmlNumericEntityUnescape(data.tomatoConsensus) : null; 
 			addRatingRow('rotten', data.tomatoMeter, 100, 'Rotten Tomatoes', null, details);
 		}
 	};
 
 	var fireQuery = function(query, cb) {
+		if(isDebug) {
+			console.debug('query', query);
+		}		
 		$.getJSON('http://www.omdbapi.com/', query, function(data) {
+			if(isDebug) {
+				console.debug('result', data);
+			}
 			if(data.Response === 'True') {
 				cb(null, data);
 			} else {
@@ -83,18 +85,81 @@
 		});
 	};
 
-	fireQuery(query, function(err, result) {
-		if(err) {
-			query.t = $('.MovieDescription [itemprop=name]').text();
-			fireQuery(query, function(err, result) {
-				if(!err) {
-					annotate(result);
+	var queries = {
+		filme: [],
+		serien: []
+	};
+
+	queries.filme.push(function() {
+		var releaseInfo = $('.MovieInfoRelease').text().trim().split(/\s*\|\s*/);
+		var year = releaseInfo[0];
+		var title = $('.InfoDetails').eq(3).find('.links').text();
+
+		return {
+			t: 			title,
+			y: 			year,
+			tomatoes: 	true
+		};		
+	});
+
+	queries.filme.push(function() {
+		var releaseInfo = $('.MovieInfoRelease').text().trim().split(/\s*\|\s*/);
+		var year = releaseInfo[0];
+		var title = $('.MovieDescription [itemprop=name]').text();
+
+		return {
+			t: 			title,
+			y: 			year,
+			tomatoes: 	true
+		};			
+	});
+
+	queries.serien.push(function() {
+		// the header
+		var title = $('.MovieDescription [itemprop=name]').text();
+		return {
+			t: 			title,
+			tomatoes: 	true
+		};
+	});
+
+	queries.serien.push(function() {
+		var title = $('.MovieDescription [itemprop=name]').text();
+		
+		// title without " - Staffel X"
+		return {
+			t: 			title.split(/^(.*?) - Staffel \d+$/i, 2)[1],
+			tomatoes: 	true
+		};
+	});
+
+	queries.serien.push(function() {
+		var title = $('.MovieDescription [itemprop=name]').text();
+		
+		// title until first hyphen
+		return {
+			t: 			title.split(/\s*-/, 1)[0],
+			tomatoes: 	true
+		};
+	});
+
+
+	function fallbackQuery(queryFns) {
+		var curFn = queryFns.shift();
+		if(typeof curFn === 'function') {
+			fireQuery(curFn(), function(err, result) {
+				if(err) {
+					fallbackQuery(queryFns);
 				} else {
-					console.error(err);
+					annotate(result);
 				}
 			});
 		} else {
-			annotate(result);
+			console.error('Could not find any data');
 		}
-	});
+	}
+
+	var type = window.location.pathname.split('/',2)[1];
+	fallbackQuery(queries[type]);
+
 })();

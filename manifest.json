@@ -9,16 +9,19 @@
     "128": "icons/icon128.png"
   },
   "permissions": [
-    "*://www.watchever.de/filme/*"
+    "*://www.watchever.de/filme/*",
+    "*://www.watchever.de/serien/*"
   ],
   "content_scripts": [
     {
       "run_at": "document_end",
       "matches": [
-        "*://www.watchever.de/filme/*"
+        "*://www.watchever.de/filme/*",
+        "*://www.watchever.de/serien/*"
       ],
       "include_globs": [
-        "*://www.watchever.de/filme/*-??????"
+        "*://www.watchever.de/filme/*-??????",
+        "*://www.watchever.de/serien/*-??????"
       ],   
       "css" : [
         "src/inject/inject.css"
