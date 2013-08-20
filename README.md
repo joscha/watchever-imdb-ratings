@@ -14,7 +14,7 @@ You can install the latest version
 * **0.0.4** _(2013-08-18)_: initial public version
 
 ## Acknowledgements
-IMDb ratings for watchever uses the Open Movie Database API by Brian Fritz (http://www.omdbapi.com/) for querying IMDb and Rotten Tomatoes and says thanks Brian!
+The IMDb ratings for watchever extension uses the Open Movie Database API by Brian Fritz (http://www.omdbapi.com/) for querying IMDb and Rotten Tomatoes. Thanks Brian!
 
 ## License
 MIT
