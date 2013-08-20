@@ -3,8 +3,6 @@
 
 	var isDebug = false;
 
-	var extensionId = chrome.i18n.getMessage("@@extension_id");
-
 	var container = $('.ratingBloc > .rating');
 	var bluePrint = container.find('.rateStars').find('.vote:not(.enabled), .mb.mr:not(.hidden)').clone();
 	bluePrint.find('li').removeClass('off on half');
@@ -38,7 +36,7 @@
 			textNode.attr('title', details);
 		}
 		var div = $('<div>', {
-			class: ['rateStars', extensionId, type].join(' ')
+			class: ['rateStars', 'imdb-ratings-watchever', type].join(' ')
 		});
 		clone.appendTo(div);
 		div.prependTo(container);
@@ -90,55 +88,54 @@
 		serien: []
 	};
 
-	queries.filme.push(function() {
+	function getReleaseInfo() {
 		var releaseInfo = $('.MovieInfoRelease').text().trim().split(/\s*\|\s*/);
-		var year = releaseInfo[0];
+		return {
+			year: releaseInfo[0]
+		};
+	}
+
+	function getMovieDescription() {
+		return $('.MovieDescription [itemprop=name]').text();
+	}
+
+	queries.filme.push(function() {
 		var title = $('.InfoDetails').eq(3).find('.links').text();
 
 		return {
 			t: 			title,
-			y: 			year,
+			y: 			getReleaseInfo().year,
 			tomatoes: 	true
 		};		
 	});
 
 	queries.filme.push(function() {
-		var releaseInfo = $('.MovieInfoRelease').text().trim().split(/\s*\|\s*/);
-		var year = releaseInfo[0];
-		var title = $('.MovieDescription [itemprop=name]').text();
-
 		return {
-			t: 			title,
-			y: 			year,
+			t: 			getMovieDescription(),
+			y: 			getReleaseInfo().year,
 			tomatoes: 	true
 		};			
 	});
 
 	queries.serien.push(function() {
-		// the header
-		var title = $('.MovieDescription [itemprop=name]').text();
 		return {
-			t: 			title,
+			t: 			getMovieDescription(),
 			tomatoes: 	true
 		};
 	});
 
-	queries.serien.push(function() {
-		var title = $('.MovieDescription [itemprop=name]').text();
-		
+	queries.serien.push(function() {		
 		// title without " - Staffel X"
 		return {
-			t: 			title.split(/^(.*?) - Staffel \d+$/i, 2)[1],
+			t: 			getMovieDescription().split(/^(.*?) - Staffel \d+$/i, 2)[1],
 			tomatoes: 	true
 		};
 	});
 
-	queries.serien.push(function() {
-		var title = $('.MovieDescription [itemprop=name]').text();
-		
+	queries.serien.push(function() {		
 		// title until first hyphen
 		return {
-			t: 			title.split(/\s*-/, 1)[0],
+			t: 			getMovieDescription().split(/\s*-/, 1)[0],
 			tomatoes: 	true
 		};
 	});
