@@ -9,6 +9,9 @@ You can install the latest version
 * for Firefox from [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/imdb-ratings-for-watchever/).
 
 ## History
+* **0.0.7** _(2013-09-01)_:
+	* Fix for URLs with query parameters in Chrome
+	* show Rotten Tomatoes rating as percentage
 * **0.0.6** _(2013-08-20)_: cleanup and first Firefox version
 * **0.0.5** _(2013-08-19)_: add support for series
 * **0.0.4** _(2013-08-18)_: initial public version
