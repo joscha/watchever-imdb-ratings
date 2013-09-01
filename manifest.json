@@ -1,6 +1,6 @@
 {
   "name": "IMDb ratings for watchever",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "manifest_version": 2,
   "description": "Enhances watchever with movie ratings from IMDb and Rotten Tomatoes.",
   "icons": {
@@ -20,8 +20,8 @@
         "*://www.watchever.de/serien/*"
       ],
       "include_globs": [
-        "*://www.watchever.de/filme/*-??????",
-        "*://www.watchever.de/serien/*-??????"
+        "*://www.watchever.de/filme/*-*",
+        "*://www.watchever.de/serien/*-*"
       ],   
       "css" : [
         "data/inject/inject.css"

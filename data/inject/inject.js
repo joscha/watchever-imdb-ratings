@@ -13,7 +13,8 @@
 		var roundedPercentage = Math.round(rating / of * 10) / 10;
 
 		var starContainer = clone.eq(0);
-		starContainer.attr('title', rating + ' / ' + of);
+		var title = rating + ((of === 100) ?  '%' : ' / ' + of);
+		starContainer.attr('title', title);
 		var stars = starContainer.find('li');
 		stars.addClass(function(index) {
 			var fullStarPercentage = (index + 1) / 5;
