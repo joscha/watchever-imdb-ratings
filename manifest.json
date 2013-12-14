@@ -1,5 +1,6 @@
 {
-  "name": "IMDb ratings for watchever",
+  "name": "IMDb and Rotten Tomatoes ratings for watchever",
+  "short_name": "Ratings for watchever",
   "version": "0.0.7",
   "manifest_version": 2,
   "description": "Enhances watchever with movie ratings from IMDb and Rotten Tomatoes.",
