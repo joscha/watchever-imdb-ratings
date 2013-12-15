@@ -8,7 +8,6 @@ __* * * Neither this extension, nor its author is in any way affiliated with Wat
 ## Description
 This extension seamlessly adds the ratings from IMDb and Rotten Tomatoes into the watchever web interface.
 Each movie and series detail page gets two more rating rows (if the movie/series can be found in IMDb).
-You can install the latest version
 
 ## Install
 * for Chrome from [the Chrome Webstore](https://chrome.google.com/webstore/detail/imdb-ratings-for-watcheve/foobflajciachdjffhabgjfnommkpibb/).
