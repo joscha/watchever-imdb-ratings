@@ -1,10 +1,6 @@
 # Chrome extension for adding IMDb and Rotten Tomatoes ratings to watchever
 __* * * Neither this extension, nor its author is in any way affiliated with Watchever GmbH. * * *__
 
-## Screenshot
-
-![image](https://raw.github.com/joscha/watchever-imdb-ratings/master/artwork/screenshot.png)
-
 ## Description
 This extension seamlessly adds the ratings from IMDb and Rotten Tomatoes into the watchever web interface.
 Each movie and series detail page gets two more rating rows (if the movie/series can be found in IMDb).
@@ -12,6 +8,10 @@ Each movie and series detail page gets two more rating rows (if the movie/series
 ## Install
 * for Chrome from [the Chrome Webstore](https://chrome.google.com/webstore/detail/imdb-ratings-for-watcheve/foobflajciachdjffhabgjfnommkpibb/).
 * for Firefox from [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/imdb-ratings-for-watchever/).
+
+## Screenshot
+
+![image](https://raw.github.com/joscha/watchever-imdb-ratings/master/artwork/screenshot.png)
 
 ## History
 * **0.0.7** _(2013-09-01)_:
