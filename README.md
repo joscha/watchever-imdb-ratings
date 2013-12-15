@@ -22,3 +22,7 @@ The IMDb ratings for watchever extension uses the Open Movie Database API by Bri
 
 ## License
 MIT
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/joscha/watchever-imdb-ratings/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
