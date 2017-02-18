@@ -1,4 +1,6 @@
 # Chrome extension for adding IMDb and Rotten Tomatoes ratings to watchever
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/joscha/watchever-imdb-ratings.svg)](https://greenkeeper.io/)
 __* * * Neither this extension, nor its author is in any way affiliated with Watchever GmbH. * * *__
 
 ## Description
